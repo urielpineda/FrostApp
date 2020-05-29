@@ -1,12 +1,11 @@
 package com.upineda.frostapp.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.upineda.frostapp.R
@@ -26,7 +25,7 @@ class SearchActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(SearchActivityViewModel::class.java)
 
         iv_search.setOnClickListener {
-            if (et_search.text!!.isNotEmpty())
+            if (et_search.text!!.isNotEmpty() && search_progress.visibility == GONE)
                 viewModel.searchLocation(et_search.text.toString())
         }
 

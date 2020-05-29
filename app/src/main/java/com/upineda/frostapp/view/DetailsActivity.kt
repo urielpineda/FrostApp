@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -61,6 +60,9 @@ class DetailsActivity : AppCompatActivity() {
         }
 
         bt_to.setOnClickListener {
+            if (details_progress.visibility == VISIBLE)
+                return@setOnClickListener
+
             val datePicker = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
@@ -104,9 +106,12 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.showProgress.observe(this, Observer {
             if (it) {
                 details_progress.visibility = VISIBLE
+                bt_to.isEnabled = false
                 tv_no_results_weather.visibility = GONE
-            } else
+            } else {
                 details_progress.visibility = GONE
+                bt_to.isEnabled = true
+            }
         })
 
         viewModel.response.observe(this, Observer {
