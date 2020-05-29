@@ -32,7 +32,6 @@ class SearchActivity : AppCompatActivity() {
 
         et_search.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                //Perform Code
                 iv_search.performClick()
                 return@OnKeyListener true
             }
@@ -40,8 +39,10 @@ class SearchActivity : AppCompatActivity() {
         })
 
         viewModel.showProgress.observe(this, Observer {
-            if (it)
+            if (it) {
                 search_progress.visibility = VISIBLE
+                tv_no_results_search.visibility = GONE
+            }
             else
                 search_progress.visibility = GONE
         })
@@ -49,6 +50,8 @@ class SearchActivity : AppCompatActivity() {
         viewModel.locationList.observe(this, Observer {
             if (it != null)
                 adapter.setLocationList(it)
+            else
+                tv_no_results_search.visibility = VISIBLE
         })
 
         adapter = LocationAdapter(this)

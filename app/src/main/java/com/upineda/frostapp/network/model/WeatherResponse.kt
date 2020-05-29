@@ -14,7 +14,3 @@ class Observations(
     val elementId: String,
     val unit: String
 )
-
-class Level(
-    val value: Int
-)

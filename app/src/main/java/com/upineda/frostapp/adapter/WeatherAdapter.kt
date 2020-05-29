@@ -1,18 +1,12 @@
 package com.upineda.frostapp.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.upineda.frostapp.R
-import com.upineda.frostapp.network.model.Location
 import com.upineda.frostapp.network.model.WeatherResponse
-import com.upineda.frostapp.view.DetailsActivity
-import kotlinx.android.synthetic.main.rv_location_child.view.*
-import kotlinx.android.synthetic.main.rv_location_child.view.child_root
 import kotlinx.android.synthetic.main.rv_weather_child.view.*
 
 class WeatherAdapter(private val context: Context) :
@@ -30,9 +24,7 @@ class WeatherAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         var time = weather.data[position].referenceTime
-        time = time.replace("t", " ", true)
-        time = time.replace("z", "", true)
-        time = time.substring(0, time.length - 7);
+        time = timeFormater(time)
 
         holder.time.text = time
 
@@ -72,6 +64,16 @@ class WeatherAdapter(private val context: Context) :
         val icon = v.iv_icon!!
         val windSpeed = v.tv_wind_speed!!
         val wind = v.tv_wind!!
+    }
+
+    // format date and time to look more readable
+    // before: 2019-11-25T00:00:00.000Z
+    // after:  2019-11-25 00:00
+    fun timeFormater(time: String): String {
+        var retVal = time.replace("T", " ", true)
+        retVal = retVal.replace("Z", "", true)
+        retVal = retVal.substring(0, time.length - 8);
+        return retVal;
     }
 
 }

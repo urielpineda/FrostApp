@@ -1,10 +1,8 @@
 package com.upineda.frostapp.repository
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
 import com.upineda.frostapp.network.BASE_URL
 import com.upineda.frostapp.network.WeatherNetwork
 import com.upineda.frostapp.network.model.WeatherResponse

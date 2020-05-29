@@ -2,14 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/tools"
-    android:id="@+id/child_root"
+    android:id="@+id/child_weather"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:layout_marginBottom="8dp"
-    card_view:cardElevation="0dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     app:cardBackgroundColor="@android:color/white"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="1dp"
+    card_view:cardElevation="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
                 android:id="@+id/tv_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="7.1 °C"
+                android:text=""
                 android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             <ImageView
@@ -35,9 +36,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:visibility="gone" />
-
 
 
         </LinearLayout>
@@ -52,26 +52,25 @@
                 android:id="@+id/tv_wind"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 android:layout_gravity="center_vertical"
-                android:text="Wind Speed: "
-                android:textSize="12sp" />
+                android:text="@string/wind_speed"
+                android:textSize="12sp"
+                android:visibility="invisible" />
+
             <TextView
                 android:id="@+id/tv_wind_speed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="invisible"
                 android:layout_gravity="center_vertical"
-                android:text="5.5 m/s"
                 android:layout_weight="1"
-                android:textSize="12sp" />
+                android:textSize="12sp"
+                android:visibility="invisible" />
 
             <TextView
                 android:id="@+id/tv_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="2020-03-04 12:00:00 PM" />
+                android:layout_gravity="center_vertical" />
         </LinearLayout>
 
     </LinearLayout>

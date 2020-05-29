@@ -2,14 +2,13 @@ package com.upineda.frostapp.view
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.gson.Gson
 import com.upineda.frostapp.R
 import com.upineda.frostapp.adapter.WeatherAdapter
 import com.upineda.frostapp.network.model.WeatherData
@@ -47,11 +46,7 @@ class DetailsActivity : AppCompatActivity() {
             val datePicker = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                    //set to textView
-                    fromDate =
-                        "" + mYear + "-" + DecimalFormat("00").format(mMonth + 1) + "-" + DecimalFormat(
-                            "00"
-                        ).format(mDay)
+                    fromDate = formatDate(mMonth, mDay, mYear)
 
                     fromCalender.set(mYear, mMonth, mDay)
                     tv_from.setText(fromDate)
@@ -69,11 +64,7 @@ class DetailsActivity : AppCompatActivity() {
             val datePicker = DatePickerDialog(
                 this,
                 DatePickerDialog.OnDateSetListener { view, mYear, mMonth, mDay ->
-                    //set to textView
-                    toDate =
-                        "" + mYear + "-" + DecimalFormat("00").format(mMonth + 1) + "-" + DecimalFormat(
-                            "00"
-                        ).format(mDay)
+                    toDate = formatDate(mMonth, mDay, mYear)
                     tv_to.setText(toDate)
                     toCalendar.set(mYear, mMonth, mDay)
 
@@ -101,17 +92,20 @@ class DetailsActivity : AppCompatActivity() {
         }
         if (intent.hasExtra("shortName")) {
             tv_location_short.text = intent.getStringExtra("shortName")
+            if (tv_location_short.text.isEmpty())
+                tv_location_short.visibility = View.GONE
         }
         if (intent.hasExtra("municipality")) {
             tv_municipality.text = intent.getStringExtra("municipality")
+            if (tv_municipality.text.isEmpty())
+                tv_municipality.visibility = View.GONE
         }
 
-
-
         viewModel.showProgress.observe(this, Observer {
-            if (it)
+            if (it) {
                 details_progress.visibility = VISIBLE
-            else
+                tv_no_results_weather.visibility = GONE
+            } else
                 details_progress.visibility = GONE
         })
 
@@ -136,6 +130,8 @@ class DetailsActivity : AppCompatActivity() {
                 }
                 filteredWeatherResponse.data = weatherData
                 adapter.setWeatherList(filteredWeatherResponse)
+            } else {
+                tv_no_results_weather.visibility = VISIBLE
             }
         })
 
@@ -158,7 +154,11 @@ class DetailsActivity : AppCompatActivity() {
         viewModel.getWeather(locationId, "$fromDate/$toDate")
     }
 
-    fun showDatePickerDialog() {
-        var datePickerDialog = DatePicker(this)
+    fun formatDate(month: Int, day: Int, year: Int): String {
+        val returnString =
+            "" + year + "-" + DecimalFormat("00").format(month + 1) + "-" + DecimalFormat(
+                "00"
+            ).format(day)
+        return returnString
     }
 }

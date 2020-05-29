@@ -6,8 +6,6 @@ import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-//const val BASE_URL = "https://frost.met.no/sources/v0.jsonld?types=SensorSystem&country=NO&municipality=HALDEN"
-
 const val BASE_URL = "https://frost.met.no/"
 
 interface WeatherNetwork {

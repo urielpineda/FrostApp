@@ -1,7 +1,5 @@
 package com.upineda.frostapp.network.model
 
-import kotlinx.android.parcel.Parcelize
-
 class Station(
     val id: String = "",
     val municipality: String = "",
