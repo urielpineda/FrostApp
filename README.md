@@ -4,7 +4,7 @@ Native Android - Kotlin - MVVM
 
 Using Frost API, the user can search through municipalities in Norway 
 <br>
-and select a station to view the it's weather data. The user also has
+and select a station to view it's weather data. The user also has
 <br>
 the option to select the dates they want to view the weather in
 <br>
